@@ -1,14 +1,16 @@
-NAME = megaphone
+NAME = phonebook
 FLAGS = -Wall -Werror -Wextra -std=c++20
 
-SRCS = megaphone.cpp
-OBJS = megaphone.o
+HEADERS = PhoneBook.hpp Contact.hpp
+
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 .SECONDARY: $(OBJS)
 
 all: $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	c++ $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

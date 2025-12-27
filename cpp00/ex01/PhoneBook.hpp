@@ -1,15 +1,21 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
-# include <iostream>
+
+#include <iomanip>
+#include "Contact.hpp"
 
 class PhoneBook {
 	public:
 		void addContact();
 		void searchContact();
-		int num;
+		void displayContacts();
+		int getIndex(size_t &id);
+		void displaySearchResult(size_t &id);
 
 	private:
-		Contact _contact[8];
+		size_t current_{0};
+		size_t size_{0};
+		Contact contact_[8];
 };
 
 #endif
