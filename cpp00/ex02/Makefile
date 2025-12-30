@@ -1,5 +1,5 @@
 NAME = banklog
-FLAGS = -Wall -Wextra -std=c++20
+FLAGS = -Wall -Wextra -Werror
 
 HEADERS = Account.hpp
 
@@ -10,8 +10,15 @@ OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-%.o: %.cpp $(HEADERS)
-	c++ $(FLAGS) -c $< -o $@
+tests.o: tests.cpp
+	c++ $(FLAGS) --std=c++98 -c $< -o $@
+
+Account.o: Account.cpp
+	c++ $(FLAGS) --std=c++20 -c $< -o $@
+
+
+# %.o: %.cpp $(HEADERS)
+# 	c++ $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	c++ $(FLAGS) $^ -o $@

@@ -1,6 +1,6 @@
 #include "Contact.hpp"
 
-void	Contact::getString(std::string hint, std::string &prompt)
+void	Contact::assignAttribute(std::string hint, std::string &prompt)
 {
 	while (1) {
 		std::cout << hint + ":" <<std::endl;
@@ -15,11 +15,11 @@ void	Contact::getString(std::string hint, std::string &prompt)
 
 void	Contact::addContact()
 {
-	getString("First Name", firstname_);
-	getString("Last Name", lastname_);
-	getString("Nickname", nickname_);
-	getString("Phone Number", phoneNumber_);
-	getString("Darkest Secret", darkestSecret_);
+	assignAttribute("First Name", firstname_);
+	assignAttribute("Last Name", lastname_);
+	assignAttribute("Nickname", nickname_);
+	assignAttribute("Phone Number", phoneNumber_);
+	assignAttribute("Darkest Secret", darkestSecret_);
 }
 
 std::string	Contact::getFirstname()

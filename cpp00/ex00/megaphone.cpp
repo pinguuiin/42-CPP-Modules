@@ -7,9 +7,8 @@ int	main(int argc, char **argv)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else {
 		for (int i = 1; i < argc; ++i) {
-			std::string token = argv[i];
-			for (int j = 0; token[j]; ++j) {
-				unsigned char c = std::toupper(token[j]);
+			for (int j = 0; argv[i][j]; ++j) {
+				unsigned char c = std::toupper(argv[i][j]);
 				std::cout << c;
 			}
 		}

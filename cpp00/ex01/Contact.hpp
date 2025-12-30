@@ -7,7 +7,7 @@
 class Contact {
 
 	public:
-		void getString(std::string hint, std::string &prompt);
+		void assignAttribute(std::string hint, std::string &prompt);
 		void addContact();
 		std::string getFirstname();
 		std::string getLastname();
