@@ -1,10 +1,11 @@
 #ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
 #include <iomanip>
 #include "Contact.hpp"
 
 class PhoneBook {
+
 	public:
 		void addContact();
 		void searchContact();
