@@ -1,0 +1,58 @@
+#include <iostream>
+#include <fstream>
+
+static int	open_input_file(char *infileName, std::string &buffer)
+{
+	std::ifstream infile(infileName);
+	if (!infile) {
+		std::cerr << "Unable to open input file" << std::endl;
+		return 1;
+	}
+
+	std::string line;
+	while (std::getline(infile, line)) {
+		buffer += line + "\n";
+	}
+	infile.close();
+	return 0;
+}
+
+static void	replace_string(const std::string &s1, const std::string &s2, std::string &buffer)
+{
+	std::size_t lenS1 = s1.length();
+	std::size_t lenS2 = s2.length();
+	std::size_t pos = 0;
+
+	while (1) {
+		pos = buffer.find(s1, pos);
+		if (pos != std::string::npos) {
+			buffer.erase(pos, lenS1);
+			buffer.insert(pos, s2);
+			pos += lenS2;
+			continue ;
+		}
+		break ;
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	std::string buffer = "";
+	if (argc != 4) {
+		std::cerr << "Wrong number of arguments" << std::endl;
+		return 1;
+	}
+	if (open_input_file(argv[1], buffer))
+		return 1;
+
+	std::string outfileName = std::string(argv[1]) + ".replace";
+	std::ofstream outfile(outfileName);
+	if (!outfile) {
+		std::cerr << "Unable to open output file" << std::endl;
+		return 1;
+	}
+	replace_string(std::string(argv[2]), std::string(argv[3]), buffer);
+	outfile << buffer;
+	outfile.close();
+	return 0;
+}
