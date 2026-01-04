@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 {
 	std::string buffer = "";
 	if (argc != 4) {
-		std::cerr << "Wrong number of arguments" << std::endl;
+		std::cerr << "Please input 3 arguments in the order: input_file old_string new_string" << std::endl;
 		return 1;
 	}
 	if (open_input_file(argv[1], buffer))
