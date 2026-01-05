@@ -1,18 +1,14 @@
 #include <iostream>
 #include <fstream>
 
-static int	open_input_file(char *infileName, std::string &buffer)
+static int	read_input_file(char *infileName, std::string &buffer)
 {
 	std::ifstream infile(infileName);
 	if (!infile) {
 		std::cerr << "Unable to open input file" << std::endl;
 		return 1;
 	}
-
-	std::string line;
-	while (std::getline(infile, line)) {
-		buffer += line + "\n";
-	}
+	std::getline(infile, buffer, (char)EOF);
 	infile.close();
 	return 0;
 }
@@ -42,7 +38,7 @@ int	main(int argc, char **argv)
 		std::cerr << "Please input 3 arguments in the order: input_file old_string new_string" << std::endl;
 		return 1;
 	}
-	if (open_input_file(argv[1], buffer))
+	if (read_input_file(argv[1], buffer))
 		return 1;
 
 	std::string outfileName = std::string(argv[1]) + ".replace";

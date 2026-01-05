@@ -2,7 +2,10 @@
 
 void	HumanB::attack() const
 {
-	std::cout << name_ << " attacks with their " << weapon_->getType() << std::endl;
+	if (weapon_)
+		std::cout << name_ << " attacks with their " << weapon_->getType() << std::endl;
+	else
+		std::cout << name_ << " is unarmed" << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon &weapon)
@@ -10,4 +13,4 @@ void	HumanB::setWeapon(Weapon &weapon)
 	weapon_ = &weapon;
 }
 
-HumanB::HumanB(std::string name) : name_(name) {};
+HumanB::HumanB(std::string name) : name_(name), weapon_(NULL) {};
