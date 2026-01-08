@@ -1,24 +1,35 @@
 #include "Fixed.hpp"
-#include "iomanip"
 
 int main( void )
 {
 	Fixed a;
-	Fixed const b( 200 );
-	Fixed const c( 42.42f );
-	Fixed const d( b );
+	Fixed b( Fixed( 5.05f ) * Fixed( 2 ) );  // b = 10.10
+	Fixed const c( Fixed( 5.0f ) / Fixed( 3 ) );  // c = 1.66
+	Fixed const d( Fixed( 10000.6f ) + Fixed( 2345 ) );  // d = 12345.6
+	Fixed const e( Fixed( 66666.6f ) - Fixed( 333 ) );  // e = 66333.6
 
-	a = Fixed( -1234.4321f );
 
-	std::cout << "a is " << std::fixed << a << std::endl;
-	std::cout << "b is " << std::fixed << b << std::endl;
-	std::cout << "c is " << std::fixed << c << std::endl;
-	std::cout << "d is " << std::fixed << d << std::endl;
+	std::cout << "a: " << a << std::endl;
+	std::cout << "a: " << ++a << std::endl;
+	std::cout << "a: " << a << std::endl;
+	std::cout << "a: " << a++ << std::endl;
+	std::cout << "a: " << a << std::endl;  // a = 2 * epsilon
 
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	std::cout << "\nb: " << b << std::endl;
+	std::cout << "b: " << ++b << std::endl;
+	std::cout << "b: " << b << std::endl;
+	std::cout << "b: " << b++ << std::endl;
+	std::cout << "b: " << b << std::endl;  // b = 10.10 - 2 * epsilon
+
+	std::cout << "\nb: " << b << std::endl;
+	std::cout << "c: " << c << std::endl;
+	std::cout << "d: " << d << std::endl;
+	std::cout << "e: " << e << std::endl;
+
+
+	std::cout << "\nmax(a,b): " << Fixed::max( a, b ) << std::endl;
+	std::cout << "min(a,b): " << Fixed::min( a, b ) << std::endl;
+	std::cout << "a is equal to b? : " << (a == b) << std::endl;
 
 	return 0;
 }

@@ -1,63 +1,153 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed() : raw_(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+//==================== Constructors and destructor ====================//
+
+Fixed::Fixed() : raw_(0) {}
 
 Fixed::Fixed(const int &dec)
 {
-	std::cout << "Int constructor called" << std::endl;
-	// // Overflow control:
-	// if (dec > std::numeric_limits<int>::max() >> fractionalBits_
-	// 	|| dec < std::numeric_limits<int>::min() >> fractionalBits_) {
-	// 	std::cout << "Integer overflow encountered" << std::endl;
-	// 	raw_ = 0;
-	// 	return ;
-	// }
 	raw_ = dec << fractionalBits_;
 }
 
 Fixed::Fixed(const float &decf)
 {
-	std::cout << "Float constructor called" << std::endl;
-	// // Overflow control:
-	// if (decf > std::numeric_limits<int>::max() / (1 << fractionalBits_)
-	// 	|| decf < std::numeric_limits<int>::min() / (1 << fractionalBits_)) {
-	// 	std::cout << "Float overflow encountered" << std::endl;
-	// 	raw_ = 0;
-	// 	return ;
-	// }
 	raw_ = static_cast<int>(roundf(decf * (1 << fractionalBits_)));
 }
 
-Fixed::Fixed(const Fixed &other) : raw_(other.raw_)
-{
-	std::cout << "Copy constructor called" << std::endl;
-}
+Fixed::Fixed(const Fixed &other) : raw_(other.raw_) {}
 
-Fixed &Fixed::operator=(const Fixed &other)
+Fixed::~Fixed() {}
+
+//=================== Assignment operators overload ===================//
+
+Fixed	&Fixed::operator=(const Fixed &other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 		raw_ = other.raw_;
 	return *this;
 }
 
-Fixed::~Fixed()
+Fixed	&Fixed::operator++()
 {
-	std::cout << "Destructor called" << std::endl;
+	++raw_;
+	return *this;
 }
+
+Fixed	Fixed::operator++(int)
+{
+	Fixed temp(*this);
+	++raw_;
+	return temp;
+}
+
+Fixed	&Fixed::operator--()
+{
+	--raw_;
+	return *this;
+}
+
+Fixed	Fixed::operator--(int)
+{
+	Fixed temp(*this);
+	--raw_;
+	return temp;
+}
+
+//=================== Arithmetic operators overload ===================//
+
+Fixed	Fixed::operator+(const Fixed &other) const
+{
+	Fixed sum;
+	sum.raw_ = raw_ + other.raw_;
+	return sum;
+}
+
+Fixed	Fixed::operator-(const Fixed &other) const
+{
+	Fixed diff;
+	diff.raw_ = raw_ - other.raw_;
+	return diff;
+}
+
+Fixed	Fixed::operator*(const Fixed &other) const
+{
+	Fixed product;
+
+	product.raw_ = static_cast<int>(static_cast<long long>(raw_) * other.raw_ >> fractionalBits_);
+	return product;
+}
+
+Fixed	Fixed::operator/(const Fixed &other) const
+{
+	Fixed quotient;
+
+	quotient.raw_ = static_cast<int>(static_cast<long long>(raw_ << fractionalBits_) / other.raw_);
+	return quotient;
+}
+
+//=================== Comparison operators overload ===================//
+
+bool	Fixed::operator>(const Fixed &other) const
+{
+	return raw_ > other.raw_;
+}
+
+bool	Fixed::operator<(const Fixed &other) const
+{
+	return raw_ < other.raw_;
+}
+
+bool	Fixed::operator>=(const Fixed &other) const
+{
+	return raw_ >= other.raw_;
+}
+
+bool	Fixed::operator<=(const Fixed &other) const
+{
+	return raw_ <= other.raw_;
+}
+
+bool	Fixed::operator==(const Fixed &other) const
+{
+	return raw_ == other.raw_;
+}
+
+bool	Fixed::operator!=(const Fixed &other) const
+{
+	return raw_ != other.raw_;
+}
+
+//=================== Comparison functions overload ===================//
+
+Fixed	&Fixed::min(Fixed &fixed1, Fixed &fixed2)
+{
+	return (fixed1 <= fixed2) ? fixed1 : fixed2;
+}
+
+const Fixed	&Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
+{
+	return (fixed1 <= fixed2) ? fixed1 : fixed2;
+}
+
+Fixed	&Fixed::max(Fixed &fixed1, Fixed &fixed2)
+{
+	return (fixed1 >= fixed2) ? fixed1 : fixed2;
+}
+
+const Fixed	&Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
+{
+	return (fixed1 >= fixed2) ? fixed1 : fixed2;
+}
+
+//================ Getter, setter and type conversions ================//
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return raw_;
 }
 
 void	Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
 	raw_ = raw;
 }
 
@@ -71,7 +161,10 @@ float	Fixed::toFloat(void) const
 	return static_cast<float>(raw_) / (1 << fractionalBits_);
 }
 
-std::ostream &operator<<(std::ostream &outstream, const Fixed &fixed)
+
+//==================== Insertion operator overload ====================//
+
+std::ostream	&operator<<(std::ostream &outstream, const Fixed &fixed)
 {
 	outstream << fixed.toFloat();
 	return outstream;
