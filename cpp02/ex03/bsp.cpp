@@ -12,7 +12,6 @@ static void	getPartition(t_coef const &f, Point const &p, Fixed &part)
 	part = f.kx * p.getX() + f.ky * p.getY() + f.kc;
 }
 
-// Returns true if the point is inside the triangle
 static bool	bspOneSide(Point const a, Point const b, Point const c, Point const point)
 {
 	t_coef f;
@@ -27,6 +26,7 @@ static bool	bspOneSide(Point const a, Point const b, Point const c, Point const 
 	return true;
 }
 
+// Returns true if the point is inside the triangle
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
 	if (bspOneSide(a, b, c, point) == false)

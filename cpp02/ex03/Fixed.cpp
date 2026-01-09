@@ -81,7 +81,7 @@ Fixed	Fixed::operator/(const Fixed &other) const
 {
 	Fixed quotient;
 
-	quotient.raw_ = static_cast<int>(static_cast<long long>(raw_ << fractionalBits_) / other.raw_);
+	quotient.raw_ = static_cast<int>((static_cast<long long>(raw_) << fractionalBits_) / other.raw_);
 	return quotient;
 }
 
