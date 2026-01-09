@@ -29,7 +29,7 @@ int main( void )
 
 	std::cout << "\nmax(a,b): " << Fixed::max( a, b ) << std::endl;
 	std::cout << "min(a,b): " << Fixed::min( a, b ) << std::endl;
-	std::cout << "a is equal to b? : " << (a == b) << std::endl;
+	std::cout << "a is equal to b? : " << (a == b ? "✅True" : "❌False") << std::endl;
 
 	return 0;
 }

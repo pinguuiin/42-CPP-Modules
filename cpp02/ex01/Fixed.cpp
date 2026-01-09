@@ -31,9 +31,10 @@ Fixed::Fixed(const float &decf)
 	raw_ = static_cast<int>(roundf(decf * (1 << fractionalBits_)));
 }
 
-Fixed::Fixed(const Fixed &other) : raw_(other.raw_)
+Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
+	*this = other;
 }
 
 Fixed &Fixed::operator=(const Fixed &other)
