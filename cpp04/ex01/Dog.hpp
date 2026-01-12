@@ -14,5 +14,5 @@ class Dog : public Animal {
 		void makeSound() const override;
 
 	private:
-		Brain *brain_;
+		Brain *brain_ = nullptr;
 };

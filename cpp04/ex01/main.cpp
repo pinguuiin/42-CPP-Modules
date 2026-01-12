@@ -4,36 +4,50 @@
 
 int main()
 {
-	const Animal* meta = new Animal();
+	// default tests
 	const Animal* dog = new Dog();
 	const Animal* cat = new Cat();
-	const WrongAnimal* antimeta = new WrongAnimal();
-	const WrongAnimal* nomewcat = new WrongCat();
 
-	std::cout << "\nBio divisions:" << std::endl;
-	std::cout << meta->getType() << " " << std::endl;
-	std::cout << antimeta->getType() << " " << std::endl;
-
-	std::cout << "\nSpecies:" << std::endl;
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
-	std::cout << nomewcat->getType() << " " << std::endl;
-
-	std::cout << "\nFarm:" << std::endl;
-	meta->makeSound();
-	cat->makeSound();
-	dog->makeSound();
-
-	std::cout << "\nWrongFarm:" << std::endl;
-	antimeta->makeSound();
-	nomewcat->makeSound();
-
-	std::cout << std::endl;
-	delete meta;
 	delete dog;
 	delete cat;
-	delete antimeta;
-	delete nomewcat;
+	std::cout << "\n" << std::endl;
+
+	// more tests
+	size_t i;
+	Animal *animal[10];
+
+	for (i = 0; i < 5; ++i)
+		animal[i] = new Cat();
+	for (i = 5; i < 10; ++i)
+		animal[i] = new Dog();
+	std::cout << std::endl;
+
+	std::cout << "name: " << animal[2]->getType() << std::endl;
+	animal[2]->makeSound();
+	std::cout << "name: " << animal[6]->getType() << std::endl;
+	animal[6]->makeSound();
+	for (i = 0; i < 10; ++i)
+		animal[i]->makeSound();
+	std::cout << std::endl;
+
+	for (i = 0; i < 10; ++i)
+		delete animal[i];
+	std::cout << std::endl;
+
+	// Brain cell test
+	Brain *oneBrainCell = new Brain();
+	Brain *anotherBrainCell = new Brain();
+	Brain *clonedBrain = new Brain(*oneBrainCell);
+
+	*anotherBrainCell = *oneBrainCell;
+	if (oneBrainCell != anotherBrainCell
+		&& anotherBrainCell != clonedBrain
+		&& oneBrainCell != clonedBrain)
+		std::cout << "Copy is a deep copy ✅\n" << std::endl;
+
+	delete oneBrainCell;
+	delete anotherBrainCell;
+	delete clonedBrain;
 
 	return 0;
 }
