@@ -7,7 +7,7 @@ int	main()
 	FragTrap c("KFC");
 	DiamondTrap d("BurgerKing");
 
-	std::cout << "\nBurgerKing - HP:100 EP:50 AT:30" << std::endl;
+	std::cout << std::endl;
 
 	a.attack("BurgerKing");
 	b.attack("BurgerKing");

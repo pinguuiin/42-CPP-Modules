@@ -16,36 +16,6 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name")
 	energyPoints_ = ScavTrap::energyPoints_;
 	attackDamage_ = FragTrap::attackDamage_;
 	std::cout << "Parameter constructor called for DiamondTrap " << name_ << std::endl;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	std::cout << hitPoints_ << "HP left\n";
-	std::cout << energyPoints_ << "EP left\n";
-	std::cout << attackDamage_ << "AT left\n";
-
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other.name_ + "_clap_name")
