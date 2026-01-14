@@ -5,7 +5,7 @@ Animal::Animal() : type_("Animal")
 	std::cout << "Animal is created" << std::endl;
 }
 
-Animal::Animal(const Animal &other) : type_(other.type_)
+Animal::Animal(const Animal &other)
 {
 	*this = other;
 	std::cout << "Animal is created as a copy of " << other.type_ << std::endl;

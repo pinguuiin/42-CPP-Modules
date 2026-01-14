@@ -5,7 +5,7 @@ WrongAnimal::WrongAnimal() : type_("WrongAnimal")
 	std::cout << "WrongAnimal is created" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &other) : type_(other.type_)
+WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
 	*this = other;
 	std::cout << "WrongAnimal is created as a copy of " << other.type_ << std::endl;
