@@ -55,17 +55,17 @@ void	AForm::execute(const Bureaucrat &executor) const
 
 const char	*AForm::GradeTooHighException::what() const noexcept
 {
-	return "Grade is too high!";
+	return "Error: Grade is too high!";
 }
 
 const char	*AForm::GradeTooLowException::what() const noexcept
 {
-	return "Grade is too low!";
+	return "Error: Grade is too low!";
 }
 
 const char	*AForm::UnsignedFormException::what() const noexcept
 {
-	return "Form needs to be signed first!";
+	return "Error: Form needs to be signed first!";
 }
 
 std::ostream	&operator<<(std::ostream &ostream, const AForm &form)

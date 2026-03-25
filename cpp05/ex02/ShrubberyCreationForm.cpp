@@ -19,11 +19,11 @@ void	ShrubberyCreationForm::executeAction() const
 {
 	std::ofstream file;
 
-	file.open(_target + "_shrubbery", std::ofstream::out | std::ofstream::app);
+	file.open(_target + "_shrubbery", std::ofstream::out);
 	if (!file.is_open())
 		throw FileOpenError();
 
-	file << "       🌟       \n";
+	file << "       @@       \n";
 	file << "      *o**      \n";
 	file << "     ******     \n";
 	file << "    *o**o***    \n";

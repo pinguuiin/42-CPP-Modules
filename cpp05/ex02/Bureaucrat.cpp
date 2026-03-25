@@ -28,12 +28,12 @@ int	Bureaucrat::getGrade() const
 
 const char	*Bureaucrat::GradeTooHighException::what() const noexcept
 {
-	return "Bureaucrat grade set too high!";
+	return "Error: Bureaucrat grade set too high!";
 }
 
 const char	*Bureaucrat::GradeTooLowException::what() const noexcept
 {
-	return "Bureaucrat grade set too low!";
+	return "Error: Bureaucrat grade set too low!";
 }
 
 void	Bureaucrat::incrementGrade()
@@ -53,18 +53,30 @@ void	Bureaucrat::decrementGrade()
 void	Bureaucrat::signForm(AForm &form)
 {
 	if (form.getSignedStatus() == true) {
-		std::cout << _name << " couldn't sign " << form.getName()
+		std::cout << getName() << " couldn't sign " << form.getName()
 				  << " because form " << form.getName() << " is already signed!"
 				  << std::endl;
 		return ;
 	}
 	try {
 		form.beSigned(*this);
-		std::cout << _name << " signed form " << form.getName() << std::endl;
+		std::cout << getName() << " signed form " << form.getName() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << _name << " couldn't sign " << form.getName()
-				  << " because " << e.what() << std::endl;
+		std::cout << e.what() << " " << getName() << " couldn't sign "
+				  << form.getName() << std::endl;
+	}
+}
+
+void	Bureaucrat::executeForm(const AForm &form) const
+{
+	try {
+		form.execute(*this);
+		std::cout << getName() << " executed " << form.getName() << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << " " << getName() << " couldn't execute "
+				  << form.getName() << std::endl;
 	}
 }
 
