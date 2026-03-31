@@ -14,7 +14,7 @@ AForm	*Intern::makeForm(std::string name, std::string target) const
 	AForm *form;
 	int i;
 
-	for (i = 0; i < 3 && formName[i] != name; ++i);
+	for (i = 0; i < 3 && formName[i] != name; i++);
 
 	switch (i) {
 		case 0:
