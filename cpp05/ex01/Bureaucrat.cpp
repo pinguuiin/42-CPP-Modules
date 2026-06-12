@@ -50,7 +50,7 @@ void	Bureaucrat::decrementGrade()
 	++_grade;
 }
 
-void	Bureaucrat::signForm(Form &form)
+void	Bureaucrat::signForm(Form &form) const
 {
 	if (form.getSignedStatus() == true) {
 		std::cout << _name << " couldn't sign " << form.getName()

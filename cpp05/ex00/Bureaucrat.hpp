@@ -18,7 +18,7 @@ class	Bureaucrat {
 
 		class GradeTooHighException : public std::exception {
 			public:
-				const char *what() const noexcept override;
+				const char *what() const noexcept override;  // noexcept: this funtion will not throw an exception itself
 		};
 
 		class GradeTooLowException : public std::exception {

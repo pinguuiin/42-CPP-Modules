@@ -33,6 +33,13 @@ int	main()
 	Bureaucrat ssManager("ssManager", 40);
 	Bureaucrat ceo("ceo", 1);
 
+	std::cout << Manager << std::endl;
+	std::cout << sManager << std::endl;
+	std::cout << ssManager << std::endl;
+	std::cout << ceo << std::endl;
+
+	std::cout << std::endl;
+
 	// -------Shrubbery-------
 	std::cout << "Not signed form:" << std::endl;
 	sManager.executeForm(gdoc);

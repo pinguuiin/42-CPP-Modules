@@ -13,12 +13,15 @@ int	main()
 	AForm *shrubby;
 	AForm *robo;
 	AForm *president;
+	Bureaucrat ceo("ceo", 1);
 
 	// nonexist form
 	try {
 		std::cout << "[Trying to create nonexistent form...]" << std::endl;
 		form = noname.makeForm("Blbie", "hawaii");
 		if (form) {
+			ceo.signForm(*form);
+			ceo.executeForm(*form);
 			std::cout << *form << "\nDeleting Blbie..." << std::endl;
 			delete form;
 		}
@@ -34,6 +37,8 @@ int	main()
 		std::cout << "[Trying to create ShrubberyCreationForm...]" << std::endl;
 		shrubby = noname.makeForm("Shrubby", "silver");
 		if (shrubby) {
+			ceo.signForm(*shrubby);
+			ceo.executeForm(*shrubby);
 			std::cout << *shrubby << "\nDeleting Shrubby..." << std::endl;
 			delete shrubby;
 		}
@@ -49,6 +54,8 @@ int	main()
 		std::cout << "[Trying to create RobotomyRequestForm...]" << std::endl;
 		robo = noname.makeForm("Robo", "Clause");
 		if (robo) {
+			ceo.signForm(*robo);
+			ceo.executeForm(*robo);
 			std::cout << *robo << "\nDeleting Robo..." << std::endl;
 			delete robo;
 		}
@@ -64,6 +71,8 @@ int	main()
 		std::cout << "[Trying to create PresidentialPardonForm...]" << std::endl;
 		president = noname.makeForm("President", "Nini");
 		if (president) {
+			ceo.signForm(*president);
+			ceo.executeForm(*president);
 			std::cout << *president << "\nDeleting President..." << std::endl;
 			delete president;
 		}
