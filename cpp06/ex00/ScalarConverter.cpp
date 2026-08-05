@@ -117,7 +117,8 @@ void	ScalarConverter::printFloat(double value, LiteralType type, const std::stri
 		if (value == HUGE_VAL || value == -HUGE_VAL)
 			std::cout << "impossible" << std::endl;
 		else
-			std::cout << static_cast<float>(value) << "f" << std::endl;
+			std::cout << std::fixed << std::setprecision(1)
+					  << static_cast<float>(value) << "f" << std::endl;
 	}
 }
 
@@ -125,8 +126,7 @@ void	ScalarConverter::printDouble(double value, LiteralType type, const std::str
 {
 	std::cout << "double: ";
 	if (type == CHAR)
-		std::cout << std::fixed << std::setprecision(1)
-				  << value << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << value << std::endl;
 	else if (type == PSEUDO) {
 		if (literal == "-inf" || literal == "+inf" || literal == "nan")
 			std::cout << literal << std::endl;
@@ -137,7 +137,7 @@ void	ScalarConverter::printDouble(double value, LiteralType type, const std::str
 		if (value == HUGE_VAL || value == -HUGE_VAL)
 			std::cout << "impossible" << std::endl;
 		else
-			std::cout << value << std::endl;
+			std::cout << std::fixed << std::setprecision(1) << value << std::endl;
 	}
 }
 
