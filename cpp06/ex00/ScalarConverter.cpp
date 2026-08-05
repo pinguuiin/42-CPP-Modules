@@ -4,6 +4,7 @@
 #include <cmath>  // HUGE_VAL
 #include <iomanip>  // fixed and setprecision()
 #include <string_view>  // string_view()
+#include <limits>  // numeric_limits<float>::max()
 
 ScalarConverter::LiteralType	ScalarConverter::detectType(const std::string &literal)
 {
@@ -76,13 +77,15 @@ void	ScalarConverter::printChar(double value, LiteralType type)
 	else if (type == PSEUDO)
 		std::cout << "impossible" << std::endl;
 	else {
-		int	num = static_cast<int>(value);
-		if (num < CHAR_MIN || num > CHAR_MAX)
+		if (value < CHAR_MIN || value > CHAR_MAX)
 			std::cout << "impossible" << std::endl;
-		else if (!isprint(static_cast<unsigned char>(value)))
-			std::cout << "Non displayable" << std::endl;
-		else
-			std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
+		else {
+			char c = static_cast<char>(value);
+			if (!isprint(static_cast<unsigned char>(c)))
+				std::cout << "Non displayable" << std::endl;
+			else
+				std::cout << "'" << c << "'" << std::endl;
+		}
 	}
 }
 
@@ -114,7 +117,8 @@ void	ScalarConverter::printFloat(double value, LiteralType type, const std::stri
 			std::cout << literal << std::endl;
 	}
 	else {
-		if (value == HUGE_VAL || value == -HUGE_VAL)
+		if (value > std::numeric_limits<float>::max()
+			|| value < -std::numeric_limits<float>::max())
 			std::cout << "impossible" << std::endl;
 		else
 			std::cout << std::fixed << std::setprecision(1)
@@ -143,14 +147,14 @@ void	ScalarConverter::printDouble(double value, LiteralType type, const std::str
 
 void	ScalarConverter::convert(const std::string &literal)
 {
-	LiteralType	type = detectType(literal);
+	LiteralType type = detectType(literal);
 
 	if (type == INVALID) {
 		std::cout << "Type conversion is impossible for invalid inputs." << std::endl;
 		return;
 	}
 
-	double	value = detectValue(literal, type);
+	double value = detectValue(literal, type);
 
 	printChar(value, type);
 	printInt(value, type);
