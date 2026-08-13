@@ -23,12 +23,12 @@ int main(void)
 
 	Span empty(5);
 	try { empty.longestSpan(); }
-	catch (const std::exception &e) { std::cout << "Empty: " << e.what() << std::endl; }
+	catch (const std::exception &e) { std::cerr << "Empty: " << e.what() << std::endl; }
 
 	Span one(5);
 	one.addNumber(42);
 	try { one.shortestSpan(); }
-	catch (const std::exception &e) { std::cout << "Single element: " << e.what() << std::endl; }
+	catch (const std::exception &e) { std::cerr << "Single element: " << e.what() << std::endl; }
 
 	// ========== capacity ==========
 
@@ -39,13 +39,13 @@ int main(void)
 	small.addNumber(2);
 	small.addNumber(3);
 	try { small.addNumber(4); }
-	catch (const std::exception &e) { std::cout << "Full: " << e.what() << std::endl; }
+	catch (const std::exception &e) { std::cerr << "Full: " << e.what() << std::endl; }
 	std::cout << "Still usable:\n" << small.shortestSpan()
 			  << "\n" << small.longestSpan() << std::endl;  // 1, 2
 
 	Span zero(0);
 	try { zero.addNumber(1); }
-	catch (const std::exception &e) { std::cout << "Capacity 0: " << e.what() << std::endl; }
+	catch (const std::exception &e) { std::cerr << "Capacity 0: " << e.what() << std::endl; }
 
 	// ========== values ==========
 
