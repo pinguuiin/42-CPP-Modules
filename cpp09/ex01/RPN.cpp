@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <limits>
 
 bool RPN::isOperand(char c)
 {
@@ -27,12 +28,15 @@ void RPN::applyOperator(char op)
 	if (op == '/' && right == 0)
 		throw std::invalid_argument("Error");
 	switch (op) {
-		case '+': _stack.push(left + right); return;
-		case '-': _stack.push(left - right); return;
-		case '*': _stack.push(left * right); return;
-		case '/': _stack.push(left / right); return;
-		default: throw std::invalid_argument("Error"); return;
+		case '+': _stack.push(left + right); break;
+		case '-': _stack.push(left - right); break;
+		case '*': _stack.push(left * right); break;
+		case '/': _stack.push(left / right); break;
+		default: throw std::invalid_argument("Error");
 	}
+	if (_stack.top() > std::numeric_limits<int>::max()
+	|| _stack.top() < std::numeric_limits<int>::min())
+		throw std::out_of_range("Error");
 }
 
 void RPN::process(const std::string &expr)
