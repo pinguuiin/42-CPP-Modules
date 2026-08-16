@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <deque>
+#include <chrono>
 
 class PmergeMe {
 
@@ -11,10 +12,15 @@ class PmergeMe {
 		PmergeMe &operator=(const PmergeMe &o) = default;
 		~PmergeMe() = default;
 
+		void parse(int argc, char **argv);
+		void run();
 		void sort(std::vector<int> &seq);
-		void message(const std::vector<int> &seq) const;
+		void sort(std::deque<int> &seq);
+		void message() const;
 
 	private:
-		std::vector<std::vector<int>> _vec;
-		std::deque<std::deque<int>> _deq;
+		std::vector<int> _vec;
+		std::deque<int> _deq;
+		double _vecTime;
+		double _deqTime;
 };
