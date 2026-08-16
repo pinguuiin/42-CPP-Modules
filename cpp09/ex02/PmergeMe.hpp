@@ -12,7 +12,7 @@ class PmergeMe {
 		~PmergeMe() = default;
 
 		void sort(std::vector<int> &seq);
-		void message(const std::vector<int> &seq);
+		void message(const std::vector<int> &seq) const;
 
 	private:
 		std::vector<std::vector<int>> _vec;

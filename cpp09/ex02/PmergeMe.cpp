@@ -22,11 +22,13 @@ void mergeInsertBase(std::vector<int> &seq, const std::vector<std::vector<int>> 
 	}
 }
 
-size_t getSmallPairIndex(int value, const std::vector<std::vector<int>> &pairs)
+size_t getSmallPairIndex(int value, const std::vector<std::vector<int>> &pairs, std::vector<bool> &used)
 {
 	for (size_t i = 0; i < pairs.size(); ++i) {
-		if (pairs[i][0] == value && pairs[i].size() == 2)
+		if (pairs[i][0] == value && pairs[i].size() == 2 && used[i] == false) {
+			used[i] = true;
 			return i;
+		}
 	}
 	throw std::runtime_error("Error: pair not found");
 }
@@ -112,7 +114,10 @@ void PmergeMe::sort(std::vector<int> &seq)
 	}
 
 	// for > 3 elements, insert first small pair to the front of the sequence first
-	size_t sid = getSmallPairIndex(seq[0], pairs);
+	// `used` flag is to control that small numbers can only be inserted once each
+	std::vector<bool> used(pairs.size(), false);
+
+	size_t sid = getSmallPairIndex(seq[0], pairs, used);
 	seq.insert(seq.begin(), pairs[sid][1]);
 
 	// insert pending elements in the order derived from jacobsthal numbers
@@ -120,7 +125,7 @@ void PmergeMe::sort(std::vector<int> &seq)
 
 	// find the insertion position for the small number using binary search, with its large pair as the search bound
 	for (size_t i = 0; i < order.size(); ++i) {
-		int small = pairs[getSmallPairIndex(large[order[i] - 1], pairs)][1];
+		int small = pairs[getSmallPairIndex(large[order[i] - 1], pairs, used)][1];
 		auto bound = std::find(seq.begin(), seq.end(), large[order[i] - 1]);
 		auto pos = binarySearch(small, seq, bound - seq.begin());
 
@@ -133,7 +138,7 @@ void PmergeMe::sort(std::vector<int> &seq)
 	}
 }
 
-void PmergeMe::message(const std::vector<int> &seq)
+void PmergeMe::message(const std::vector<int> &seq) const
 {
 	std::cout << "After: ";
 	for (size_t i = 0; i < seq.size(); ++i)
