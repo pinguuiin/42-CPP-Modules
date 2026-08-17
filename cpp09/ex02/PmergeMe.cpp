@@ -9,13 +9,17 @@ void PmergeMe::parse(int argc, char **argv)
 			throw std::invalid_argument("Error");
 		int j = 0;
 		while (argv[i][j]) {
-			if (!std::isdigit(argv[i][j]))
+			if (!std::isdigit(static_cast<unsigned char>(argv[i][j])))
 				throw std::invalid_argument("Error");
 			++j;
 		}
-		int num = std::stoi(argv[i]);
-		if (num > std::numeric_limits<int>::max())
+		int num;
+		try {
+			num = std::stoi(argv[i]);
+		}
+		catch (const std::out_of_range &e) {
 			throw std::out_of_range("Error");
+		}
 		_vec.push_back(num);
 		_deq.push_back(num);
 	}

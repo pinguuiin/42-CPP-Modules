@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include <numeric> // iota()
 #include <iostream>
-#include <limits>
 #include <chrono>
 #include <iomanip>
 
@@ -29,6 +28,6 @@ class PmergeMe {
 	private:
 		std::vector<int> _vec;
 		std::deque<int> _deq;
-		double _vecTime;
-		double _deqTime;
+		double _vecTime{0};
+		double _deqTime{0};
 };
